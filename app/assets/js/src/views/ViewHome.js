@@ -69,6 +69,7 @@ define([
             var self = this;
             self.$super();
             self.bindEventsHook();
+            self.el.find('.step1 input').focus();
         },
 
         //-- Functions
@@ -76,13 +77,17 @@ define([
         bindEventsHook: function () {
             var self = this;
 
-            self.el.find('button').on('click', function () {
+            self.el.find('.step1 button').on('click', function () {
                 self.generateName();
             });
 
-            $('body').on('keypress', function(e) {
+            self.el.find('.step2 button').on('click', function () {
+                self.showStep1();
+            });
+
+            $('.step1 input').on('keypress', function(e) {
                 if (e.keyCode == 13) {
-                    self.el.find('button').trigger('click');
+                    self.el.find('.step1 button').trigger('click');
                 }
             });
 
@@ -95,15 +100,43 @@ define([
             });
         },
 
+        showStep1: function () {
+            var self = this;
+
+            self.el.find('.step1').show();
+            self.el.find('.step2').hide();
+
+            self.el.find('.error').text('');
+            self.el.find('.step1 input').val('').focus();
+        },
+
+        showStep2: function (name, generatedName) {
+            var self = this;
+
+            self.el.find('.result').text(generatedName);
+            self.el.find('.step2 .name').text(name);
+
+            self.el.find('.step1').hide();
+            self.el.find('.step2').show();
+        },
+
+        showError: function (error) {
+            var self = this;
+
+            ga('send', 'event', 'Click', 'Generate Name', 'Name given is invalid');
+
+            self.el.find('.result').text('');
+            self.el.find('.error').text(error);
+            self.el.find('.step1 input').focus();
+        },
+
         generateName: function() {
             var self = this;
-            var nameArray = self.splitInputName();
+            var inputValue = self.el.find('.step1 input').val();
+            var nameArray = self.splitInputName(inputValue);
 
             if (self.error) {
-                self.el.find('.result').text('');
-                self.el.find('.error').text(self.error);
-                ga('send', 'event', 'Click', 'Generate Name', 'Name given is invalid');
-                return;
+                return self.showError(self.error);
             }
 
             ga('send', 'event', 'Click', 'Generate Name', 'Generating a new random nickname');
@@ -114,13 +147,11 @@ define([
             var firstNameGenerated = self.convertNumberToGeneratedName(firstNameScore, self.firstNameArray);
             var lastNameGenerated = self.convertNumberToGeneratedName(lastNameScore, self.lastNameArray);
 
-            self.el.find('.result').text(firstNameGenerated + ' ' + lastNameGenerated);
-            self.el.find('.error').text('');
+            self.showStep2(inputValue, firstNameGenerated + ' ' + lastNameGenerated);
         },
 
-        splitInputName: function () {
+        splitInputName: function (inputVal) {
             var self = this;
-            var inputVal = self.el.find('input').val().toLowerCase();
             var name = inputVal.split(' ');
 
             self.error = null;
@@ -137,7 +168,7 @@ define([
             var number = name.length;
 
             for (var i = 0, len = name.length; i < len; i++) {
-                number += _.indexOf(self.alphabet, name.substring(i, i + 1)) + 1;
+                number += _.indexOf(self.alphabet, name.toLowerCase().substring(i, i + 1)) + 1;
             }
 
             return number;

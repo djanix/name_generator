@@ -12,44 +12,48 @@
 
         <script type="text/javascript">
             window.config = {
-                cacheBreak: "1419014752037163979"
+                cacheBreak: "1419021518344735167"
             };
 
             window.deviceType = 'desktop';
         </script>
 
-        <link rel="stylesheet" href="./assets/css/dest/main.css?v=1419014752037648888"/>
+        <link rel="stylesheet" href="./assets/css/dest/main.css?v=1419021518345278572"/>
     </head>
 
     <body>
         <!-- Facebook Connect script -->
-        <script>
-            window.fbAsyncInit = function() {
-                FB.init({
-                    appId      : '951072808254252',
-                    xfbml      : true,
-                    version    : 'v2.2'
-                });
-            };
-
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js?v=1419014752038460371";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=951072808254252&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
         <!-- End Facebook Connect script -->
 
         <div id="site">
             <div data-view="Home">
                 <h1><span>Champagne Papi’s</span><br/>Street Moniker<br/>Generator</h1>
 
-                <input type="text" placeholder="Type your name here" /><br/>
-                <button>Generate Name</button>
-                <div class="error"></div>
-                <div class="result"></div>
+                <div class="step1">
+                    <input type="text" placeholder="Type your name here" /><br/>
+                    <button>Generate Name</button>
+                    <div class="error"></div>
+                </div>
+
+                <div class="step2">
+                    Introducing...
+                    <div class="name"></div>
+
+                    <div class="result-container">
+                        A.K.A.
+                        <div class="result"></div>
+                    </div>
+
+                    <button>Get Another Stree Moniker</button>
+                </div>
 
                 <div class="share">
                     <div class="share-facebook">
@@ -65,7 +69,7 @@
             </div>
         </div>
 
-        <script data-main="./assets/js/boot.js?v=1419014752038460371" src="./assets/js/libs/requirejs/require.js?v=1419014752038460371"></script>
+        <script data-main="./assets/js/boot.js?v=1419021518345466208" src="./assets/js/libs/requirejs/require.js?v=1419021518345466208"></script>
 
         <!-- Google Analytics script -->
         <script>
