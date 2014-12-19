@@ -87,12 +87,6 @@ body:after {
     width: 0;
 }
 
-@media only screen and (max-width: $tablet) {
-    body:after {
-        content: 'tablet';
-    }
-}
-
 @media only screen and (max-width: $mobile) {
     body:after {
         content: 'mobile';

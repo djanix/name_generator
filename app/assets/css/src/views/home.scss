@@ -1,7 +1,8 @@
 [data-view="Home"] {
     font-weight: bold;
     margin: 0 auto;
-    max-width: 610px;
+    max-width: 630px;
+    padding: 0 10px;
     text-align: center;
     text-transform: uppercase;
 
@@ -47,16 +48,34 @@
     .error {
         color: red;
     }
-}
 
-@media only screen and (max-width: $tablet) {
-    [data-view="Home"] {
-        /* home view tablet styles */
+    .share-facebook,
+    .share-twitter {
+        display: inline-block;
+        margin: 30px 5px 0 5px;
+        vertical-align: top;
     }
 }
 
 @media only screen and (max-width: $mobile) {
     [data-view="Home"] {
-        /* home view mobile styles */
+        h1 {
+            font-size: 8vw;
+        }
+
+        input {
+            font-size: 18px;
+        }
+
+        button {
+            display: block;
+            margin: 0 0 20px 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .share-twitter {
+            padding-top: 2px;
+        }
     }
 }

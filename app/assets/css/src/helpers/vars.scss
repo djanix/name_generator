@@ -1,7 +1,4 @@
-$color: #ababab;
-
-$tablet: 1024px;
-$mobile: 540px;
+$mobile: 630px;
 
 //usage: @include filter(grayscale, 100%);
 @mixin filter($filter-type, $filter-amount) {

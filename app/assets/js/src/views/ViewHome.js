@@ -14,7 +14,7 @@ define([
 
         //-- Vars
         //--------------------------------------------------------------
-        firstName: [
+        firstNameArray: [
             'Big',
             'Kid',
             'Young',
@@ -37,7 +37,7 @@ define([
             'Wavy'
         ],
 
-        lastName: [
+        lastNameArray: [
             'Chemistry',
             'Math',
             'Algebra',
@@ -59,6 +59,8 @@ define([
             'Atom',
             'Biosynthesis'
         ],
+
+        alphabet: ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','','y','z'],
         error: null,
 
         //-- Init
@@ -83,102 +85,67 @@ define([
                     self.el.find('button').trigger('click');
                 }
             });
+
+            self.el.find('.share-facebook').on('click', function () {
+                ga('send', 'event', 'Click', 'Sharing', 'Sharing via facebook');
+            });
+
+            self.el.find('.share-twitter').on('click', function () {
+                ga('send', 'event', 'Click', 'Sharing', 'Sharing via twitter');
+            });
+        },
+
+        generateName: function() {
+            var self = this;
+            var nameArray = self.splitInputName();
+
+            if (self.error) {
+                self.el.find('.result').text('');
+                self.el.find('.error').text(self.error);
+                ga('send', 'event', 'Click', 'Generate Name', 'Name given is invalid');
+                return;
+            }
+
+            ga('send', 'event', 'Click', 'Generate Name', 'Generating a new random nickname');
+
+            var firstNameScore = self.convertInputNameToNumber(nameArray[0]);
+            var lastNameScore = self.convertInputNameToNumber(nameArray[1]);
+
+            var firstNameGenerated = self.convertNumberToGeneratedName(firstNameScore, self.firstNameArray);
+            var lastNameGenerated = self.convertNumberToGeneratedName(lastNameScore, self.lastNameArray);
+
+            self.el.find('.result').text(firstNameGenerated + ' ' + lastNameGenerated);
+            self.el.find('.error').text('');
         },
 
         splitInputName: function () {
             var self = this;
-            var inputVal = self.el.find('input').val();
+            var inputVal = self.el.find('input').val().toLowerCase();
             var name = inputVal.split(' ');
 
             self.error = null;
 
             if (!inputVal || name.length < 2) {
-                console.log('error');
                 self.error = 'You need to write your first name and last name';
             }
 
-
-            console.log(name);
+            return name;
         },
 
-        generateName: function() {
+        convertInputNameToNumber: function (name) {
             var self = this;
+            var number = name.length;
 
-            self.splitInputName();
-
-            var newName = 'Bobby Bob Boucher';
-
-            if (self.error) {
-                self.el.find('.result').text('');
-                self.el.find('.error').text(self.error);
-            } else {
-                self.el.find('.result').text(newName);
-                self.el.find('.error').text('');
+            for (var i = 0, len = name.length; i < len; i++) {
+                number += _.indexOf(self.alphabet, name.substring(i, i + 1)) + 1;
             }
 
-            //var firstNm = document.getElementById("fName").value.toUpperCase();
-            //var middleNm = document.getElementById("mName").value.toUpperCase();
-            //var lastNm = document.getElementById("lName").value.toUpperCase();
-            //var validName = true;
-            //
-            //if (firstNm == "") {
-            //    validName = false;
-            //}
-            //else {
-            //    var firstNum = firstNm.charCodeAt(0) - 65;
-            //
-            //    if (firstNum < 0 || firstNum > 25) {
-            //        validName = false;
-            //    }
-            //}
-            //
-            //if (!validName) {
-            //    document.getElementById("fName").focus();
-            //    document.getElementById("fName").select();
-            //    return "That's not a valid first name";
-            //}
-            //if (middleNm == "") {
-            //    validName = false;
-            //}
-            //else {
-            //    var middleNum = middleNm.charCodeAt(0) - 65;
-            //
-            //    if (middleNum < 0 || middleNum > 25) {
-            //        validName = false;
-            //    }
-            //}
-            //if (!validName) {
-            //    document.getElementById("mName").focus();
-            //    document.getElementById("mName").select();
-            //    return "That's not a valid middle name";
-            //}
-            //
-            //if (lastNm == "") {
-            //    validName = false;
-            //}
-            //else {
-            //    var lastNum1 = lastNm.charCodeAt(0) - 65;
-            //    var lastNum2 = lastNm.charCodeAt((lastNm.length-1)) - 65;
-            //
-            //    if (lastNum1 < 0 || lastNum1 > 25 || lastNum2 < 0 || lastNum2 > 25) {
-            //        validName = false;
-            //    }
-            //}
-            //
-            //if (!validName) {
-            //    document.getElementById("lName").focus();
-            //    document.getElementById("lName").select();
-            //    return "That's not a valid last name";
-            //}
-            //
-            //console.log(firstNum, middleNum, lastNum1, lastNum2);
-            //console.log(firstName[firstNum]
-            //    , middleName[middleNum] , lastName1[lastNum1]
-            //    ,  lastName2[lastNum2])
-            //
-            //return "Your silly name is " + firstName[firstNum]
-            //    + " " +  middleName[middleNum] + " " + lastName1[lastNum1] + ' '
-            //    + lastName2[lastNum2];
+            return number;
+        },
+
+        convertNumberToGeneratedName: function (number, array) {
+            var position = number % array.length;
+            return (array[position]);
         }
     });
 

@@ -6,22 +6,42 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Champagne Papi’s Street Moniker Generator</title>
-        <meta name="description" content="">
+        <title>Champagne Papi gave me the street moniker</title>
+        <meta name="description" content="Champagne Papi gave me the street moniker">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <script type="text/javascript">
             window.config = {
-                cacheBreak: "141894079704171515"
+                cacheBreak: "1419014752037163979"
             };
 
             window.deviceType = 'desktop';
         </script>
 
-        <link rel="stylesheet" href="./assets/css/dest/main.css?v=14189407970421553"/>
+        <link rel="stylesheet" href="./assets/css/dest/main.css?v=1419014752037648888"/>
     </head>
 
     <body>
+        <!-- Facebook Connect script -->
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    appId      : '951072808254252',
+                    xfbml      : true,
+                    version    : 'v2.2'
+                });
+            };
+
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js?v=1419014752038460371";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <!-- End Facebook Connect script -->
+
         <div id="site">
             <div data-view="Home">
                 <h1><span>Champagne Papi’s</span><br/>Street Moniker<br/>Generator</h1>
@@ -30,9 +50,33 @@
                 <button>Generate Name</button>
                 <div class="error"></div>
                 <div class="result"></div>
+
+                <div class="share">
+                    <div class="share-facebook">
+                        <div class="fb-share-button" data-href="http://champagnepapinamemonikergenerator.com" data-layout="button"></div>
+                    </div>
+
+                    <div class="share-twitter">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+                        <!-- Twitter script -->
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <script data-main="./assets/js/boot.js?v=1418940797042111465" src="./assets/js/libs/requirejs/require.js?v=1418940797042111465"></script>
+        <script data-main="./assets/js/boot.js?v=1419014752038460371" src="./assets/js/libs/requirejs/require.js?v=1419014752038460371"></script>
+
+        <!-- Google Analytics script -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-57854326-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <!-- End Google Analytics script -->
     </body>
 </html>
